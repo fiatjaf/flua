@@ -1,0 +1,51 @@
+{
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublish": "make"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      "browserify-global-shim"
+    ]
+  },
+  "browserify-global-shim": {
+    "fengari": "fengari"
+  },
+  "peerDependencies": {
+    "fengari": "^0.1.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "browserify": "^16.2.3",
+    "browserify-global-shim": "^1.0.3",
+    "fengari": "^0.1.4"
+  },
+  "name": "flua",
+  "version": "0.1.0",
+  "description": "Easy scriptable Lua in the browser with fengari.",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiatjaf/flua.git"
+  },
+  "keywords": [
+    "lua",
+    "script",
+    "fengari"
+  ],
+  "author": "fiatjaf@alhur.es",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fiatjaf/flua/issues"
+  },
+  "homepage": "https://github.com/fiatjaf/flua#readme"
+}

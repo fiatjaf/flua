@@ -1,0 +1,5 @@
+lib
+node_modules
+*.swp
+*.swo
+example.bundle.js
