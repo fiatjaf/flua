@@ -1,6 +1,6 @@
 {
   "name": "flua",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Easy scriptable Lua in the browser with fengari.",
   "directories": {
     "lib": "lib"

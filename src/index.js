@@ -97,8 +97,6 @@ export function flua_readany(L, pos) {
       return x
     case LUA_TTABLE:
       return flua_readtable(L, pos)
-    case LUA_TFUNCTION:
-      return null
   }
   return null
 }
@@ -170,7 +168,7 @@ export function flua_pushany(L, val) {
     case 'number':
       lua_pushnumber(L, val)
       break
-    case 'bool':
+    case 'boolean':
       lua_pushboolean(L, val)
       break
     case 'object':
