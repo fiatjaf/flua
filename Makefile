@@ -5,3 +5,6 @@ lib/index.js: src/index.js
 
 example.bundle.js: lib/index.js
 	./node_modules/.bin/browserify example.js -o example.bundle.js
+
+test: lib/index.js test.js
+	./node_modules/.bin/tape test.js
