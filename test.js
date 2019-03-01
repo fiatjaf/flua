@@ -47,6 +47,13 @@ test('bizarre objects', function(t) {
 
   let ret = flua.runWithGlobals(globals, '', ['m', 'n'])
   t.deepEqual(ret, globals)
+
+  // values shouldn't be the same references
+  t.plan(globals.length)
+  for (let k in globals) {
+    t.notEqual(globals[k], ret[k])
+  }
+
   t.end()
 })
 
