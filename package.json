@@ -1,4 +1,25 @@
 {
+  "name": "flua",
+  "version": "0.2.0",
+  "description": "Easy scriptable Lua in the browser with fengari.",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiatjaf/flua.git"
+  },
+  "keywords": [
+    "lua",
+    "script",
+    "fengari"
+  ],
+  "author": "fiatjaf@alhur.es",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fiatjaf/flua/issues"
+  },
+  "homepage": "https://github.com/fiatjaf/flua#readme",
   "main": "lib/index.js",
   "scripts": {
     "prepublish": "make"
@@ -26,26 +47,5 @@
     "browserify": "^16.2.3",
     "browserify-global-shim": "^1.0.3",
     "fengari": "^0.1.4"
-  },
-  "name": "flua",
-  "version": "0.1.0",
-  "description": "Easy scriptable Lua in the browser with fengari.",
-  "directories": {
-    "lib": "lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fiatjaf/flua.git"
-  },
-  "keywords": [
-    "lua",
-    "script",
-    "fengari"
-  ],
-  "author": "fiatjaf@alhur.es",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fiatjaf/flua/issues"
-  },
-  "homepage": "https://github.com/fiatjaf/flua#readme"
+  }
 }

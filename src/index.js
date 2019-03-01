@@ -4,6 +4,7 @@ const fengari = require('fengari')
 
 const lua = fengari.lua
 const lauxlib = fengari.lauxlib
+const lualib = fengari.lualib
 
 const {
   LUA_TBOOLEAN,
@@ -37,6 +38,22 @@ const {
 } = lua
 
 // utils
+export function run(code, getglobals) {
+  runWithGlobals({}, code, getglobals)
+}
+
+export function runWithGlobals(globals, code, getglobals = []) {
+  const L = lauxlib.luaL_newstate()
+  lualib.luaL_openlibs(L)
+  flua_setglobals(L, globals)
+  let bad = lauxlib.luaL_loadstring(L, fengari.to_luastring(code))
+  if (bad) {
+    throw new Error(bad)
+  }
+  lua.lua_call(L, 0, 0, 0)
+  return flua_getglobals(L, getglobals)
+}
+
 export function flua_setglobals(L, globals) {
   for (let k in globals) {
     let v = globals[k]

@@ -8,63 +8,22 @@ npm install flua
 ```
 
 ```js
-const fengari = require('fengari')
-const flua = require('./lib/index.js')
+const flua = require('flua')
 
-const lua = fengari.lua
-const lauxlib = fengari.lauxlib
-const lualib = fengari.lualib
-
-main()
-
-function main() {
-  const L = lauxlib.luaL_newstate()
-  lualib.luaL_openlibs(L)
-
-  flua.flua_setglobals(L, {
-    a: {
-      anumber: 12,
-      astr: 'plic',
-      anarr: [1, 'sete', null, false]
-    },
-    b: {b: {b: {b: {b: {b: 123}}}}},
-    func: function xpri(a, b, c, b, e) {
-      console.log('PRINT', a, b, c, d, e)
-    }
-  })
-
-  let bad = lauxlib.luaL_loadstring(
-    L,
-    fengari.to_luastring(`
-  print(b.b.b.b.b)
-  print(b.b.b.b.b.b)
-  for k, v in pairs(a) do
-    print(k, v)
-  end
-  local value = a.value or {x='y'}
-  a.value = value
-  value.z = 'w'
-
-  m = {}
-  n = {1,2,3, nil}
-  o = {a=false, b=nil}
-    `)
-  )
-
-  if (bad) {
-    console.log('code loading went bad:', bad)
-    return
-  }
-
-  let err = lua.lua_pcall(L, 0, 0, 0)
-  if (err) {
-    console.log('execution went bad:', err)
-    return
-  }
-
-  console.log('got globals', flua.flua_getglobals(L, ['a', 'm', 'n', 'o']))
+try {
+  let {tojs} = flua.runWithGlobals({
+    fromjs: 10,
+    multiply: (value, times) => value * times
+  }, 'tojs = multiply(fromjs, 3)', ['tojs'])
+  console.log(tojs) // 30
+} catch (e) {
+  console.log(e)
 }
 ```
+
+(When passing functions from JavaScript to Lua, you can make them return an array. In that case it will translate into a Lua function that returns multiple values. If you want a Lua function that returns an array-table instead of multiple values, return an array with your desired array inside.)
+
+If you want more control, see [example.js](example.js) or read the source for `runWithGlobals`.
 
 Don't install [fengari from npm](https://www.npmjs.com/package/fengari). What you need is [fengari-web](https://www.npmjs.com/package/fengari-web). But since it doesn't work with Browserify you can include it with
 
@@ -72,4 +31,4 @@ Don't install [fengari from npm](https://www.npmjs.com/package/fengari). What yo
 <script src="https://cdn.jsdelivr.net/npm/fengari-web@0.1.4/dist/fengari-web.js"></script>
 ```
 
-and then you can use `window.fengari` instead of `require('fengari')` (on `example.js` I'm using [a browserify shim](https://github.com/rluba/browserify-global-shim)).
+and then you can use `window.fengari` instead of `require('fengari')` (on [example.js](example.js) I'm using [a browserify shim](https://github.com/rluba/browserify-global-shim)).
