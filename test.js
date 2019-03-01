@@ -49,3 +49,22 @@ test('bizarre objects', function(t) {
   t.deepEqual(ret, globals)
   t.end()
 })
+
+test('errors', function(t) {
+  t.plan(2)
+
+  try {
+    flua.run('incomplete_function(')
+  } catch (e) {
+    t.pass('syntax error')
+  }
+
+  try {
+    flua.run('inexisting_function()')
+  } catch (e) {
+    t.ok(
+      e.message.indexOf('attempt to call a nil value') !== -1,
+      'runtime error'
+    )
+  }
+})
