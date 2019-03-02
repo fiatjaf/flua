@@ -50,7 +50,12 @@ export function runWithGlobals(globals, code, getglobals = []) {
   if (bad) {
     throw new Error(bad)
   }
-  lua.lua_call(L, 0, 0, 0)
+  let err = lua.lua_pcall(L, 0, 0, 0)
+  if (err) {
+    let errmsg = lua_tojsstring(L, -1)
+    lua_pop(L, 1)
+    throw new Error(errmsg)
+  }
   return flua_getglobals(L, getglobals)
 }
 
